@@ -40,4 +40,8 @@ ${SBX} : ${SIF} ${BUILD_DEP}
 .PHONY : shell
 shell : ${SBX}
 	@mkdir -p ${OVL}
-	${SINGULARITY} shell --pwd /opt --fakeroot --overlay ${OVL} --shell /bin/bash ${SBX}
+	@if [ -d ../../work ] ; then \
+	    ${SINGULARITY} shell --pwd /opt --fakeroot --overlay ${OVL} --bind ../../work:/opt/work --shell /bin/bash ${SBX} ; \
+	else \
+	    ${SINGULARITY} shell --pwd /opt --fakeroot --overlay ${OVL} --shell /bin/bash ${SBX} ; \
+	fi
