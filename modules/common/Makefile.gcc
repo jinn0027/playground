@@ -1,0 +1,3 @@
+MOD=gcc
+
+include ./common.mk

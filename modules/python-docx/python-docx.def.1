@@ -1,0 +1,20 @@
+Bootstrap: localimage
+From: ../common/el9.sif
+
+%setup
+
+%files
+
+%post
+
+    dnf install -y \
+        emacs
+
+    pushd /opt
+        # install python-docx
+        /opt/miniconda3/bin/mamba install -y -q python-docx=1.2.0
+    popd
+
+%environment
+
+%runscript

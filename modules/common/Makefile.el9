@@ -1,0 +1,4 @@
+MOD=el9
+
+include ./common.mk
+

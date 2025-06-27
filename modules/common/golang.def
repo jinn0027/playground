@@ -1,0 +1,6 @@
+Bootstrap: localimage
+From: ./el9.sif
+
+%post
+    dnf install -y \
+        golang-1.*

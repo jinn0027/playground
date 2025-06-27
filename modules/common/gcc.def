@@ -1,0 +1,23 @@
+Bootstrap: localimage
+From: ./el9.sif
+
+%post
+    dnf install -y \
+        gcc-c++-11.* \
+        make-1:4.* \
+        zlib-devel-1.* \
+        cmake-3.* \
+        xz-devel-5.* \
+        autoconf-2.* \
+        automake-1.* \
+        bzip2-devel-1.* \
+        libcurl-devel-7.* \
+        ncurses-devel-6.* \
+        gsl-devel-2.* \
+        lmdb-libs-0.* \
+        libzstd-devel-1.* \
+        libcom_err-devel-1.* \
+        krb5-devel-1.* \
+        isa-l-devel-2.* \
+        libdeflate-devel-1.*
+

@@ -1,0 +1,48 @@
+Bootstrap: docker
+From: almalinux:9
+
+%files
+    ../../external/Miniconda3-py39_24.9.2-0-Linux-x86_64.sh /opt
+
+%post
+    dnf update -y
+    dnf install -y epel-release
+    dnf config-manager --set-enabled crb 
+    dnf makecache
+
+    dnf install -y \
+        git-2.* \
+        perl-4:5.* \
+        pigz-2.* \
+        unzip-6.* \
+        bzip2-1.* \
+        pbzip2-1.* \
+        cpio-2.* \
+        ruby-3.* \
+        R-4.*
+
+    pushd /opt
+        # install miniconda
+        echo "############ miniconda ###############"
+        sh Miniconda3-py39_24.9.2-0-Linux-x86_64.sh -b -p /opt/miniconda3
+
+        # install python libraries
+        echo "############ python libraries ###############"
+        /opt/miniconda3/bin/conda config --add channels conda-forge
+        /opt/miniconda3/bin/conda config --add channels bioconda
+        /opt/miniconda3/bin/conda install -y \
+            python=3.12.8 \
+            libarchive=3.7.7 \
+            numpy=1.26.4 \
+            pandas=2.2.3 \
+            mamba=2.0.5 \
+            libmamba=2.0.5 \
+            libmambapy=2.0.5 \
+            conda-libmamba-solver=24.11.1 \
+            biopython=1.78
+    popd
+
+%environment
+    export LC_ALL=C
+    export PATH=/opt/miniconda3/bin:$PATH
+    export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
